@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const axiosRetry = require('axios-retry');
+axiosRetry(axios, { retries: 3 });
 const cheerio = require('cheerio');
 const cors = require('cors');
 
