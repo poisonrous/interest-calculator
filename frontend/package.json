@@ -2,7 +2,7 @@
   "name": "interest-calculator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://poisonrous.github.io/interest-calculator/",
+  "homepage": "https://interest-calculator-olive-six.vercel.app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

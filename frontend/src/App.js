@@ -53,7 +53,7 @@ function App() {
     let newTotal = 0;
 
     rows.forEach(row => {
-      fetch('http://localhost:3001/calculate', {
+      fetch('https://interest-calculator-olive-six.vercel.app/api/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
