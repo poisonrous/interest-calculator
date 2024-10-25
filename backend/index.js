@@ -7,7 +7,19 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+// Configurar CORS
+const allowedOrigins = ['https://interest-calculator-olive-six.vercel.app', 'https://interest-calculator-7th04eufm-poisonrous-projects.vercel.app'];
+app.use(cors({
+  origin: function(origin, callback){
+    // Permitir solicitudes sin 'origin' como Postman o Curl
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'La política de CORS para este sitio no permite el acceso desde el origen especificado.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 app.use(bodyParser.json());
 
 let interestData = [];
