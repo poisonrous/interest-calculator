@@ -88,7 +88,7 @@ axios(url)
       console.log(error);
     });
 
-app.post('/calculate', (req, res) => {
+app.post('/api/calculate', (req, res) => {
   const { amount, startDate, endDate } = req.body;
 
   const interest = calculateInterest(amount, new Date(startDate), new Date(endDate));
