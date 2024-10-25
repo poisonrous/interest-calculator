@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/interest-calculator/static/css/main.eaa2df01.css",
+    "main.js": "/interest-calculator/static/js/main.c491075a.js",
+    "static/js/453.71177a2e.chunk.js": "/interest-calculator/static/js/453.71177a2e.chunk.js",
+    "index.html": "/interest-calculator/index.html",
+    "main.eaa2df01.css.map": "/interest-calculator/static/css/main.eaa2df01.css.map",
+    "main.c491075a.js.map": "/interest-calculator/static/js/main.c491075a.js.map",
+    "453.71177a2e.chunk.js.map": "/interest-calculator/static/js/453.71177a2e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eaa2df01.css",
+    "static/js/main.c491075a.js"
+  ]
+}
