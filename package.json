@@ -1,14 +1,16 @@
 {
-  "devDependencies": {
-    "gh-pages": "^6.2.0"
-  },
-
+  "name": "interest-calculator",
+  "version": "1.0.0",
   "scripts": {
     "start": "cd frontend && npm start",
     "build": "cd frontend && npm run build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d frontend/build"
+    "serve": "cd backend && npm start",
+    "dev": "concurrently \"npm run serve\" \"npm start\""
+  },
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   }
-
-
 }
