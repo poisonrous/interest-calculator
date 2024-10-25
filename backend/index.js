@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios');
+const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const cors = require('cors');
 
@@ -15,10 +15,12 @@ let interestData = [];
 
 const url = 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/tiposinteres/guia-textual/tiposinteresrefe/Tabla_tipos_de_interes_legal.html';
 
+;
+
 const fetchData = async () => {
   try {
-    const response = await axios(url);
-    const html = response.data;
+    const response = await fetch(url);
+    const html = await response.text();
     const $ = cheerio.load(html);
     const meses = {
       'enero': '01',
