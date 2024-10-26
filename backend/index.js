@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const cors = require('cors');
 
@@ -19,6 +18,7 @@ const url = 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosserv
 
 const fetchData = async () => {
   try {
+    const fetch = (await import('node-fetch')).default;
     const response = await fetch(url);
     const html = await response.text();
     const $ = cheerio.load(html);
