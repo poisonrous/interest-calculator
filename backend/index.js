@@ -1,11 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios'); // Usar axios nuevamente
 const cheerio = require('cheerio');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+// Configurar CORS
+const allowedOrigins = ['https://interest-calculator-olive-six.vercel.app', 'https://interest-calculator-7th04eufm-poisonrous-projects.vercel.app'];
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'La política de CORS para este sitio no permite el acceso desde el origen especificado.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 app.use(bodyParser.json());
 
 let interestData = [];
@@ -14,9 +26,8 @@ const url = 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosserv
 const fetchData = async () => {
   console.log('Inicio del fetchData'); // Log inicial para verificar si se llama la función
   try {
-    const fetch = (await import('node-fetch')).default; // Importación dinámica
-    const response = await fetch(url);
-    const html = await response.text();
+    const response = await axios.get(url);
+    const html = response.data;
     const $ = cheerio.load(html);
     const meses = {
       'enero': '01',
