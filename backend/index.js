@@ -20,7 +20,39 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
-let interestData = [];
+let interestData = [
+      { start: '2024-01-01', end: '2024-12-31', interest: 0.0325 },
+      { start: '2023-01-01', end: '2023-12-31', interest: 0.0325 },
+      { start: '2022-01-01', end: '2022-12-31', interest: 0.03 },
+      { start: '2021-01-01', end: '2021-12-31', interest: 0.03 },
+      { start: '2020-01-01', end: '2020-12-31', interest: 0.03 },
+      { start: '2019-01-01', end: '2019-12-31', interest: 0.03 },
+      { start: '2018-01-01', end: '2018-12-31', interest: 0.03 },
+      { start: '2017-01-01', end: '2017-12-31', interest: 0.03 },
+      { start: '2016-01-01', end: '2016-12-31', interest: 0.03 },
+      { start: '2015-01-01', end: '2015-12-31', interest: 0.035 },
+      { start: '2014-01-01', end: '2014-12-31', interest: 0.04 },
+      { start: '2013-01-01', end: '2013-12-31', interest: 0.04 },
+      { start: '2012-01-01', end: '2012-12-31', interest: 0.04 },
+      { start: '2011-01-01', end: '2011-12-31', interest: 0.04 },
+      { start: '2010-01-01', end: '2010-12-31', interest: 0.04 },
+      { start: '2009-01-01', end: '2009-03-31', interest: 0.055 },
+      { start: '2009-04-01', end: '2009-12-31', interest: 0.04 },
+      { start: '2008-01-01', end: '2008-12-31', interest: 0.055 },
+      { start: '2007-01-01', end: '2007-12-31', interest: 0.05 },
+      { start: '2006-01-01', end: '2006-12-31', interest: 0.04 },
+      { start: '2005-01-01', end: '2005-12-31', interest: 0.04 },
+      { start: '2004-01-01', end: '2004-12-31', interest: 0.0375 },
+      { start: '2003-01-01', end: '2003-12-31', interest: 0.0425 },
+      { start: '2002-01-01', end: '2002-12-31', interest: 0.0425 },
+      { start: '2001-01-01', end: '2001-12-31', interest: 0.055 },
+      { start: '2000-01-01', end: '2000-12-31', interest: 0.0425 },
+      { start: '1999-01-01', end: '1999-12-31', interest: 0.0425 },
+      { start: '1998-01-01', end: '1998-12-31', interest: 0.055 },
+      { start: '1997-01-01', end: '1997-12-31', interest: 0.075 },
+      { start: '1996-01-01', end: '1996-12-31', interest: 0.09 },
+      { start: '1995-01-01', end: '1995-12-31', interest: 0.09 }
+    ];
 const url = 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/tiposinteres/guia-textual/tiposinteresrefe/Tabla_tipos_de_interes_legal.html';
 
 const fetchData = async () => {
