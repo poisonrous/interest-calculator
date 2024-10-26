@@ -2,24 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cheerio = require('cheerio');
 const cors = require('cors');
-
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Configurar CORS
 app.use(cors());
 app.use(bodyParser.json());
 
 let interestData = [];
-
 const url = 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/tiposinteres/guia-textual/tiposinteresrefe/Tabla_tipos_de_interes_legal.html';
 
-;
-
 const fetchData = async () => {
-  console.log('Inicio del fetchData');
+  console.log('Inicio del fetchData'); // Log inicial para verificar si se llama la función
   try {
-    const fetch = (await import('node-fetch')).default;
+    const fetch = (await import('node-fetch')).default; // Importación dinámica
     const response = await fetch(url);
     const html = await response.text();
     const $ = cheerio.load(html);
@@ -73,7 +68,7 @@ const fetchData = async () => {
         interestData.push(row);
       }
     });
-    console.log('Datos de interés:', interestData);
+    console.log('Datos de interés cargados:', interestData.length, 'entradas'); // Log adicional
   } catch (error) {
     console.log('Error al conectar con el servidor:', error.message);
   }
@@ -85,7 +80,6 @@ fetchData()
 
 app.post('/api/calculate', (req, res) => {
   const { amount, startDate, endDate } = req.body;
-
   const interest = calculateInterest(amount, new Date(startDate), new Date(endDate));
   res.json({ interest });
 });
@@ -99,11 +93,9 @@ function calculateDaysBetweenDates(startDate, endDate) {
 }
 
 function calculateInterest(amount, startDate, endDate) {
-  console.log(amount);
-  console.log(startDate);
-  console.log(endDate);
   let totalInterest = 0;
   let currentDate = new Date(startDate);
+
   while (currentDate <= endDate) {
     const rate = interestData.find(rate => {
       const rateStart = new Date(rate.start);
@@ -120,16 +112,15 @@ function calculateInterest(amount, startDate, endDate) {
       const dailyInterest = rate.interest / daysInYear;
       const periodInterest = (amount * daysInPeriod * dailyInterest);
 
-      console.log(`Period: ${periodStart.toISOString().split('T')[0]} to ${periodEnd.toISOString().split('T')[0]}`);
-      console.log(`Days in period: ${daysInPeriod}`);
-      console.log(`Interest rate: ${rate.interest}`);
-      console.log(`Days in year: ${daysInYear}`);
-      console.log(`Daily Interest: ${dailyInterest}`);
-      console.log(`Corrected Interest for period: ${periodInterest.toFixed(10)}`);
-      console.log(`Year for period: ${year}`);
+      console.log(`Período: ${periodStart.toISOString().split('T')[0]} a ${periodEnd.toISOString().split('T')[0]}`);
+      console.log(`Días en el período: ${daysInPeriod}`);
+      console.log(`Tasa de interés: ${rate.interest}`);
+      console.log(`Días en el año: ${daysInYear}`);
+      console.log(`Interés diario: ${dailyInterest}`);
+      console.log(`Interés corregido para el período: ${periodInterest.toFixed(10)}`);
+      console.log(`Año del período: ${year}`);
 
       totalInterest += parseFloat(periodInterest.toFixed(2));
-
       currentDate = new Date(periodEnd);
       currentDate.setDate(currentDate.getDate() + 1);
     } else {
@@ -137,7 +128,7 @@ function calculateInterest(amount, startDate, endDate) {
     }
   }
 
-  console.log(`Total Interest: ${totalInterest.toFixed(2)}`);
+  console.log(`Interés total: ${totalInterest.toFixed(2)}`);
   return totalInterest.toFixed(2);
 }
 
