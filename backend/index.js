@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Configurar CORS
-const allowedOrigins = ['https://interest-calculator-olive-six.vercel.app', 'https://interest-calculator-7th04eufm-poisonrous-projects.vercel.app'];
+const allowedOrigins = ['https://interest-calculator-olive-six.vercel.app', 'https://interest-calculator-7th04eufm-poisonrous-projects.vercel.app', 'http://localhost:3000'];
 app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true);
