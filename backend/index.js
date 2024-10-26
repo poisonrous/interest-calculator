@@ -17,6 +17,7 @@ const url = 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosserv
 ;
 
 const fetchData = async () => {
+  console.log('Inicio del fetchData');
   try {
     const fetch = (await import('node-fetch')).default;
     const response = await fetch(url);
@@ -78,7 +79,9 @@ const fetchData = async () => {
   }
 };
 
-fetchData();
+fetchData()
+    .then(() => console.log('fetchData ejecutado correctamente')) // Verificación de ejecución
+    .catch(error => console.log('Error en fetchData:', error.message));
 
 app.post('/api/calculate', (req, res) => {
   const { amount, startDate, endDate } = req.body;
